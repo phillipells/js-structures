@@ -46,4 +46,38 @@ class BinaryHeap {
             this.bubbleUp(this.data.length - 1, newItem);
         }
     }
+
+    deleteMin() {
+        const head = this.data[0];
+        const tail = this.data.pop();
+
+        if(this.data.length) {
+            this.data[0] = tail;
+            this.bubbleDown(0, tail);
+        }
+    }
+
+    bubbleDown(parentIndex, parentData) {
+        const leftChildIndex = this.getLeftChildIndex(parentIndex);
+        const rightChildIndex = this.getRightChildIndex(parentIndex);
+        const leftChildData = this.data[this.getLeftChildIndex(parentIndex)];
+        const rightChildData = this.data[this.getRightChildIndex(parentIndex)];
+                
+        if(leftChildData < rightChildData) {
+            if(parentData < leftChildData) {
+                this.data[leftChildIndex] = parentData;
+                this.data[parentIndex] = leftChildData;
+
+                this.bubbleDown(leftChildIndex, parentData);
+            }
+            
+        } else if(rightChildData < leftChildData) {
+            if(parentData < rightChildData) {
+                this.data[rightChildIndex] = parentData;
+                this.data[parentIndex] = rightChildData;
+
+                this.bubbleDown(rightChildIndex, parentData);
+            }
+        }
+    }
 }
