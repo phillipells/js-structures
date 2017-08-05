@@ -2,12 +2,14 @@ class BinaryHeap {
     constructor(data) {
         this.data = data;
         this.size = data.length;
+
+        this.heapify();
     }
 
     heapify() {
         if(this.data && (this.data instanceof Array)) {
             for(let i = Math.floor((this.size - 1) / 2); i >= 0; i--) {
-
+                this.bubbleDown(i, this.data[i]);
             }
         }
     }
@@ -81,3 +83,5 @@ class BinaryHeap {
         }
     }
 }
+
+module.exports = BinaryHeap;
